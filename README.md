@@ -1,7 +1,7 @@
 1. run `download_meta_files.py` - to downloads the database dump from e621
 2. run `gen_data.py` - to generate the meta files
 3. run `build_dataset.py` - to build the dataset and upload
-    * You need to set 34 env vars for this:
+    * You need to set 4 env vars for this:
     * S3_KEY_ID=
     * S3_KEY_SECRET=
     * S3_BUCKET_NAME=
