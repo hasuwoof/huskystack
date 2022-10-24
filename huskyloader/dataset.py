@@ -67,15 +67,19 @@ class HuskyDataset(Dataset):
         image = self.flip(image)
         image_np = np.array(image).astype(np.uint8)
 
-        return (image_np / 127.5 - 1.0).astype(np.float32)
+        # XXX: If you want to use the dataset with the new trainer, transpose (or rollaxis(image_np, -1, 0))
+        return (image_np / 127.5 - 1.0).astype(np.float32)#.transpose(2, 0, 1)
 
     def get_caption(self, entry: ImageEntry) -> str:
         # if self.shuffle_tags:
         #    self.rng.shuffle(entry.tags)
-        # TODO: Implement tag priority + sprinking in leftover tags
 
-        return " ".join(itertools.chain(*entry.tags.values()))  # TODO
+        # TODO: Implement tag priority + sprinking in leftover tags
+        return " ".join(itertools.chain(*entry.tags.values()))
 
     def include(self, entry: ImageEntry):
-        # TODO: implement filtering here
+        # TODO: Implement runtime filtering here
         return True
+
+    def __len__(self):
+        return self.store.get_image_count()
